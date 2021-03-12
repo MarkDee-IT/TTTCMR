@@ -12,11 +12,18 @@
 *#################################################
 */
 #include <Wire.h>
-#include <RTClib.h>
-RTC_DS1302 rtc;
+//#include <RTClib.h>
+//RTC_DS1302 rtc;
 
 static unsigned long lastTick = 0;
 int curMin = 0,curHour = 0;
+
+static int hour = 7;
+static int minute =  7;
+static int seconds = 0;
+static int second = 0;
+
+
 
 //############################################################################
 void setup() {
@@ -26,12 +33,14 @@ void setup() {
   }
   
   Wire.begin();
-  rtc.begin();
+ // rtc.begin();
  
-  DateTime now = rtc.now();
-  second = now.second();
-  minute = now.minute();
-  hour = now.hour();
+//  DateTime now = rtc.now();
+//  second = now.second();
+//  minute = now.minute();
+//  hour = now.hour();
+
+
 }
 
 
@@ -39,6 +48,7 @@ void setup() {
 //##############################################################################
 void loop()
 {
+  
 //Seconds
 if(millis() -  lastTick >1000)
 {
@@ -52,7 +62,7 @@ if(seconds >= 60)
   seconds = 0;
 }
 //Hours
-if(currentMinute >= 60)
+if(minute >= 60)
   {
     hour++;
     minute = 0;
