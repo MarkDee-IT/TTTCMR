@@ -17,4 +17,4 @@ which can be used as a counter if we constantly have it check if 1000ms has pass
 The rest of the code is self explanatory and can be understood, using CurMin and CurHour, i split the time by leaving only the right side.
 Eg: if mins is 47, CurMin is 7.
 
-After splittign them up we use a series of if statements to get the binary of each number.
+After splitting them up we use a series of if statements to get the binary of each number.
