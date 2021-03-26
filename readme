@@ -1,1 +1,26 @@
-TO BE CONTINUED
+This is a Short Desciption of the Code
+########################################
+The necessary libraries are introduced at the start, one for the LEDs and the other for the RTC.
+
+After that three variables are created for the purpose of splitting the tens from the minutes and 
+hours, and the latter is used for incramenting seconds.
+
+Using a For loop, digital pin 1-13 is initialised and then we begin the RTC and wiring to allow it to send Information.
+
+Using the DateTime method we create a variable called now whick will get the current time form the rtc and then
+using now.second, now.minute and now.hour, we give them values.
+
+And lastly the main part of the program which allows time to flow, Millis(), instead of constantly getting the time from the RTC,
+we use a counter which incraments when 1000ms passes since the last tick, millis counts from the beginning of the proram without interupptions
+which can be used as a counter if we constantly have it check if 1000ms has passed since the last time we incramented.
+
+The rest of the code is self explanatory and can be understood, using CurMin and CurHour, i split the time by leaving only the right side.
+Eg: if mins is 47, CurMin is 7.
+
+After splitting them up we use a series of if statements to get the binary of each number.
+
+#########################################
+
+This is an update for the testing branch
+
+The main differences is the commented out code for the RTC library and its associated methods, and the adjustment to the variables made to create test time cases
