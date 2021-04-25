@@ -5,7 +5,7 @@
 *The TTTCMR
 *By Daniel Kovzan, Mark Dee, Clintano Perrins and Gatis Berzins
 *Modified By Daniel Kovzan 16:51 11/03/2021
-*Modified by Mark Dee 12:36 25/04/2021
+*
 *
 *
 *
@@ -14,15 +14,10 @@
 *#################################################
 */
 #include <Wire.h>
-<<<<<<< Updated upstream
-#include <RTClib.h>
-RTC_DS1302 rtc;
-=======
 #include <Bridge.h>
 #include <BlynkSimpleYun.h>
 //#include <RTClib.h>
 //RTC_DS1302 rtc;
->>>>>>> Stashed changes
 
 // You should get Auth Token in the Blynk App.
 char auth[] = "8mgU1evnl2zeJBSTzcDIWm60yNy23ihB";
@@ -33,8 +28,6 @@ int hoursUp, hoursDown, minsUp, minsDown;
 static unsigned long lastTick = 0;
 int curMin = 0,curHour = 0, userChoice = 0;
 
-<<<<<<< Updated upstream
-=======
 static int hour = 0;
 static int minute =  0;
 static int second = 0;
@@ -51,7 +44,6 @@ BLYNK_WRITE(V1) {
 
 
 
->>>>>>> Stashed changes
 //############################################################################
 void setup() {
   // put your setup code here, to run once:
@@ -59,14 +51,6 @@ void setup() {
     pinMode(i, OUTPUT);
   }
   Wire.begin();
-<<<<<<< Updated upstream
-  rtc.begin();
- 
-  DateTime now = rtc.now();
-  second = now.second();
-  minute = now.minute();
-  hour = now.hour();
-=======
   Blynk.begin(auth);
  // rtc.begin();
  
@@ -98,7 +82,6 @@ BLYNK_WRITE(V3)
 BLYNK_WRITE(V4)
 {
   minsDown = param.asInt();
->>>>>>> Stashed changes
 }
 
 
@@ -106,12 +89,9 @@ BLYNK_WRITE(V4)
 //##############################################################################
 void loop()
 {
-<<<<<<< Updated upstream
-=======
 
 Blynk.run();
 
->>>>>>> Stashed changes
 //Seconds
 if(millis() -  lastTick >1000)
 {
@@ -125,7 +105,7 @@ if(second >= 60)
   second = 0;
 }
 //Hours
-if(currentMinute >= 60)
+if(minute >= 60)
   {
     hour++;
     minute = 0;
