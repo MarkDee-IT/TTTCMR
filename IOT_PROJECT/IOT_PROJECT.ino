@@ -1,9 +1,11 @@
+
+
 /*
 *#################################################
 *The TTTCMR
 *By Daniel Kovzan, Mark Dee, Clintano Perrins and Gatis Berzins
 *Modified By Daniel Kovzan 16:51 11/03/2021
-*
+*Modified by Mark Dee 12:36 25/04/2021
 *
 *
 *
@@ -12,26 +14,91 @@
 *#################################################
 */
 #include <Wire.h>
+<<<<<<< Updated upstream
 #include <RTClib.h>
 RTC_DS1302 rtc;
+=======
+#include <Bridge.h>
+#include <BlynkSimpleYun.h>
+//#include <RTClib.h>
+//RTC_DS1302 rtc;
+>>>>>>> Stashed changes
+
+// You should get Auth Token in the Blynk App.
+char auth[] = "8mgU1evnl2zeJBSTzcDIWm60yNy23ihB";
+
+
+int hoursUp, hoursDown, minsUp, minsDown;
 
 static unsigned long lastTick = 0;
-int curMin = 0,curHour = 0;
+int curMin = 0,curHour = 0, userChoice = 0;
 
+<<<<<<< Updated upstream
+=======
+static int hour = 0;
+static int minute =  0;
+static int second = 0;
+
+//Blynk Menu Setup, hope it works
+//I think that you need to restart the program eahc time you wish to change timezone since i donty think the program ever returns to this piece of code
+
+/*
+BLYNK_WRITE(V1) {
+  hour = param.asInt();
+  
+}*/
+
+
+
+
+>>>>>>> Stashed changes
 //############################################################################
 void setup() {
   // put your setup code here, to run once:
   for (int i=1; i <= 13; i++) {
     pinMode(i, OUTPUT);
   }
-  
   Wire.begin();
+<<<<<<< Updated upstream
   rtc.begin();
  
   DateTime now = rtc.now();
   second = now.second();
   minute = now.minute();
   hour = now.hour();
+=======
+  Blynk.begin(auth);
+ // rtc.begin();
+ 
+//  DateTime now = rtc.now();
+//  second = now.second();
+//  minute = now.minute();
+//  hour = now.hour();
+
+
+
+}
+
+
+BLYNK_WRITE(V1)
+{
+  hoursUp = param.asInt();
+}
+
+BLYNK_WRITE(V2)
+{
+  hoursDown = param.asInt();
+}
+
+BLYNK_WRITE(V3)
+{
+  minsUp = param.asInt();
+}
+
+BLYNK_WRITE(V4)
+{
+  minsDown = param.asInt();
+>>>>>>> Stashed changes
 }
 
 
@@ -39,6 +106,12 @@ void setup() {
 //##############################################################################
 void loop()
 {
+<<<<<<< Updated upstream
+=======
+
+Blynk.run();
+
+>>>>>>> Stashed changes
 //Seconds
 if(millis() -  lastTick >1000)
 {
@@ -46,10 +119,10 @@ if(millis() -  lastTick >1000)
   second++;
 }
 //Minutes
-if(seconds >= 60)
+if(second >= 60)
 {
   minute++;
-  seconds = 0;
+  second = 0;
 }
 //Hours
 if(currentMinute >= 60)
@@ -137,13 +210,13 @@ else
   digitalWrite(9, LOW);
   
 //pin 10 binary 4 hour
-if(curMin == 4 || curMin == 5 || curMin == 6 || curMin == 7)
+if(curHour == 4 || curHour == 5 || curHour == 6 || curHour == 7)
   digitalWrite(10, HIGH);
 else
   digitalWrite(10, LOW);
   
   //pin 11 binary 8 hour
-if(curMin == 8 || curMin == 9)
+if(curHour == 8 || curHour == 9)
   digitalWrite(11, HIGH);
 else
   digitalWrite(11, LOW);
@@ -167,16 +240,26 @@ if(hour >= 20 && hour < 24) {
 }
 //#########################################################################################
 
+  if (hoursUp == 1)
+  {
+    hour++;
+  }
 
-
-
-
-
-
-
-
-
+  if (hoursDown == 1)
+  {
+    hour--;
+  }
   
-  
+  if (minsUp == 1)
+  {
+  minute++;
+  }
+
+  if (minsDown == 1)
+  {
+    minute--;
+  }
+
+
 
 }
